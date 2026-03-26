@@ -1,0 +1,641 @@
+<!-- Palette: Vibrant Tech Palette (#1E3A8A, #F97316, #14B8A6, #FBBF24) -->
+<!-- Plan: 
+  1. Header: Reemplazar el mundo con LOGO BT2 CON GRAFICO.jpg.
+  2. Footer: Reemplazar el cohete con LOGO BT2 HD SIN GRAFICO.jpg.
+  3. Estructura: Mantener la narrativa de impacto global, casos específicos y pilares técnicos.
+  4. Visualizaciones: Mantener Chart.js con configuraciones de wrap de etiquetas y tooltips.
+-->
+<!-- CONFIRMATION: NEITHER Mermaid JS NOR SVG were used anywhere in this output. -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Casos de Éxito BT2 Digital Telco Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+            scroll-behavior: smooth;
+        }
+        .flow-arrow::after {
+            content: "➔";
+            font-size: 1.5rem;
+            color: #1E3A8A;
+            margin: 0 10px;
+        }
+        @media (max-width: 768px) {
+            .flow-arrow::after {
+                content: "⬇";
+                display: block;
+                margin: 10px 0;
+            }
+        }
+        .bt2-logo-panel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            background:
+                radial-gradient(circle at center, rgba(255, 122, 26, 0.28) 0%, rgba(255, 122, 26, 0.12) 28%, rgba(255, 255, 255, 0) 62%),
+                linear-gradient(135deg, #fff8f1 0%, #f4f6f8 42%, #fff4ea 100%);
+            border: 1px solid rgba(255, 122, 26, 0.2);
+            box-shadow: 0 20px 45px rgba(255, 122, 26, 0.12);
+        }
+        .bt2-logo-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0.55), rgba(255,255,255,0.08), rgba(255,255,255,0.45));
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .bt2-logo-wrap {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            padding: 2rem 1.5rem;
+        }
+        .bt2-logo-mark {
+            position: relative;
+            width: 118px;
+            height: 118px;
+            border-radius: 999px;
+            border: 4px solid #ff6b00;
+            box-shadow: 0 0 24px rgba(255, 107, 0, 0.5), inset 0 0 18px rgba(255, 107, 0, 0.16);
+        }
+        .bt2-logo-orbit {
+            position: absolute;
+            border: 4px solid #ff6b00;
+            border-radius: 999px;
+            opacity: 0.88;
+        }
+        .bt2-logo-orbit.one {
+            inset: -10px -12px 24px -12px;
+            transform: rotate(-16deg);
+        }
+        .bt2-logo-orbit.two {
+            inset: 22px -16px -8px -16px;
+            transform: rotate(-16deg);
+        }
+        .bt2-logo-orbit.three {
+            inset: 42px -8px -18px -8px;
+            transform: rotate(-16deg);
+            opacity: 0.65;
+        }
+        .bt2-logo-node {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #ff6b00;
+            border-radius: 999px;
+            box-shadow: 0 0 16px rgba(255, 107, 0, 0.65);
+        }
+        .bt2-logo-node.center {
+            width: 20px;
+            height: 20px;
+            top: 48px;
+            left: 49px;
+        }
+        .bt2-logo-node.top {
+            top: 28px;
+            left: 73px;
+        }
+        .bt2-logo-node.left {
+            top: 64px;
+            left: 28px;
+        }
+        .bt2-logo-node.bottom {
+            top: 82px;
+            left: 72px;
+        }
+        .bt2-logo-link {
+            position: absolute;
+            height: 3px;
+            background: #ff6b00;
+            transform-origin: left center;
+            box-shadow: 0 0 12px rgba(255, 107, 0, 0.45);
+        }
+        .bt2-logo-link.a {
+            width: 25px;
+            top: 55px;
+            left: 57px;
+            transform: rotate(-32deg);
+        }
+        .bt2-logo-link.b {
+            width: 23px;
+            top: 63px;
+            left: 39px;
+            transform: rotate(28deg);
+        }
+        .bt2-logo-link.c {
+            width: 21px;
+            top: 75px;
+            left: 59px;
+            transform: rotate(50deg);
+        }
+        .bt2-logo-text {
+            text-align: center;
+            color: #ff6b00;
+            text-shadow: 0 0 22px rgba(255, 107, 0, 0.35);
+        }
+        .bt2-logo-text .wordmark {
+            display: block;
+            font-size: clamp(3rem, 9vw, 6.8rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: 0.08em;
+        }
+        .bt2-logo-text .divider {
+            width: min(100%, 460px);
+            height: 4px;
+            margin: 0.9rem auto 0.8rem;
+            background: linear-gradient(90deg, rgba(255,107,0,0.85), rgba(255,140,54,0.95));
+            box-shadow: 0 0 18px rgba(255, 107, 0, 0.45);
+        }
+        .bt2-logo-text .tagline {
+            display: block;
+            font-size: clamp(0.9rem, 2.1vw, 1.65rem);
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .bt2-logo-end {
+            max-width: 860px;
+            margin: 0 auto 2rem;
+        }
+        .bt2-logo-end .bt2-logo-wrap {
+            padding: 1.35rem 1rem;
+        }
+        .bt2-logo-end .bt2-logo-mark {
+            width: 84px;
+            height: 84px;
+            border-width: 3px;
+        }
+        .bt2-logo-end .bt2-logo-node {
+            width: 12px;
+            height: 12px;
+        }
+        .bt2-logo-end .bt2-logo-node.center {
+            width: 14px;
+            height: 14px;
+            top: 34px;
+            left: 35px;
+        }
+        .bt2-logo-end .bt2-logo-node.top {
+            top: 18px;
+            left: 52px;
+        }
+        .bt2-logo-end .bt2-logo-node.left {
+            top: 45px;
+            left: 17px;
+        }
+        .bt2-logo-end .bt2-logo-node.bottom {
+            top: 59px;
+            left: 51px;
+        }
+        .bt2-logo-end .bt2-logo-link.a {
+            width: 19px;
+            top: 40px;
+            left: 41px;
+        }
+        .bt2-logo-end .bt2-logo-link.b {
+            width: 16px;
+            top: 47px;
+            left: 26px;
+        }
+        .bt2-logo-end .bt2-logo-link.c {
+            width: 15px;
+            top: 56px;
+            left: 41px;
+        }
+        .bt2-logo-end .bt2-logo-text .wordmark {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+        }
+        .bt2-logo-end .bt2-logo-text .tagline {
+            font-size: clamp(0.78rem, 1.8vw, 1.15rem);
+        }
+        @media (max-width: 640px) {
+            .bt2-logo-wrap {
+                padding: 1.5rem 1rem;
+            }
+            .bt2-logo-mark {
+                width: 92px;
+                height: 92px;
+            }
+            .bt2-logo-node.center {
+                top: 36px;
+                left: 37px;
+            }
+            .bt2-logo-node.top {
+                top: 18px;
+                left: 58px;
+            }
+            .bt2-logo-node.left {
+                top: 51px;
+                left: 16px;
+            }
+            .bt2-logo-node.bottom {
+                top: 66px;
+                left: 57px;
+            }
+            .bt2-logo-link.a {
+                width: 21px;
+                top: 43px;
+                left: 44px;
+            }
+            .bt2-logo-link.b {
+                width: 20px;
+                top: 50px;
+                left: 26px;
+            }
+            .bt2-logo-link.c {
+                width: 18px;
+                top: 60px;
+                left: 44px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-[#1E3A8A] text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-wider">BT2 DIGITAL TELCO PLATFORM</h1>
+            <div class="hidden md:flex space-x-6">
+                <a href="#impacto" class="hover:text-[#FBBF24] transition">Impacto Global</a>
+                <a href="#americatel" class="hover:text-[#FBBF24] transition">Americatel</a>
+                <a href="#dasa" class="hover:text-[#FBBF24] transition">Dasa Telecom</a>
+                <a href="#bolitel" class="hover:text-[#FBBF24] transition">Bolitel</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-[#1E3A8A] text-white py-16 px-6 text-center shadow-inner">
+        <div class="max-w-5xl mx-auto flex flex-col items-center">
+            <div class="bt2-logo-panel w-full mb-8">
+                <div class="bt2-logo-wrap">
+                    <div class="bt2-logo-mark" aria-hidden="true">
+                        <span class="bt2-logo-orbit one"></span>
+                        <span class="bt2-logo-orbit two"></span>
+                        <span class="bt2-logo-orbit three"></span>
+                        <span class="bt2-logo-link a"></span>
+                        <span class="bt2-logo-link b"></span>
+                        <span class="bt2-logo-link c"></span>
+                        <span class="bt2-logo-node center"></span>
+                        <span class="bt2-logo-node top"></span>
+                        <span class="bt2-logo-node left"></span>
+                        <span class="bt2-logo-node bottom"></span>
+                    </div>
+                    <div class="bt2-logo-text">
+                        <span class="wordmark">BT2</span>
+                        <span class="divider"></span>
+                        <span class="tagline">Business Telecom BRM Platform</span>
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Modernización y Gestión de Telecomunicaciones</h2>
+            <p class="text-xl text-gray-200 mb-8 max-w-2xl">Cómo la arquitectura convergente de BT2 transformó las operaciones comerciales, técnicas y financieras en España, Colombia y Bolivia.</p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-12 space-y-24">
+
+        <section id="impacto" class="text-center">
+            <h3 class="text-3xl font-bold text-[#1E3A8A] mb-4">El Impacto Global de BT2</h3>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-10">La implementación de la plataforma ha demostrado resultados contundentes en la optimización de procesos y la protección de ingresos para operadores de diversas escalas.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-2xl shadow-xl p-10 border-t-8 border-[#F97316] transform hover:-translate-y-2 transition duration-300">
+                    <div class="text-5xl mb-4 text-[#F97316]">⏱️</div>
+                    <div class="text-6xl font-extrabold text-[#F97316] mb-2">-40%</div>
+                    <h4 class="text-2xl font-bold text-gray-800 mb-2">Time-to-Market</h4>
+                    <p class="text-gray-600">Reducción drástica en el tiempo necesario para lanzar nuevos servicios comerciales al mercado, gracias al Catálogo de Productos centralizado.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-xl p-10 border-t-8 border-[#14B8A6] transform hover:-translate-y-2 transition duration-300">
+                    <div class="text-5xl mb-4 text-[#14B8A6]">🛡️</div>
+                    <div class="text-5xl font-extrabold text-[#14B8A6] mb-2">Minimizado</div>
+                    <h4 class="text-2xl font-bold text-gray-800 mb-2">Revenue Leakage</h4>
+                    <p class="text-gray-600">Pérdida de ingresos controlada mediante una arquitectura de mediación exacta y tasación en tiempo real que asegura el cobro de cada evento de red.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="americatel" class="bg-white rounded-3xl shadow-xl overflow-hidden">
+            <div class="bg-[#1E3A8A] text-white p-8">
+                <div class="flex items-center space-x-4 mb-2">
+                    <span class="text-3xl">🇪🇸</span>
+                    <h3 class="text-3xl font-bold">1. AMERICATEL (España)</h3>
+                </div>
+                <p class="text-[#FBBF24] text-xl font-semibold">Agilidad Comercial y Despliegue de Marca Blanca</p>
+            </div>
+            
+            <div class="p-8 md:p-12">
+                <p class="text-lg text-gray-700 mb-8">AMERICATEL requería una estructura robusta para operar con identidad propia sobre infraestructura de terceros. La solución se centró en un despliegue veloz (3 meses) enfocándose en el ciclo de <strong>Revenue Management</strong> y la gestión de clientes (CRM).</p>
+
+                <h4 class="text-2xl font-bold text-[#1E3A8A] mb-6 text-center">Flujo de Facturación Automatizado (4 Etapas)</h4>
+                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Este diagrama de flujo ilustra cómo BT2 procesa los eventos de red de AMERICATEL, transformando datos técnicos crudos en facturas con identidad corporativa propia de forma automatizada.</p>
+                
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 w-full">
+                    <div class="bg-gray-100 border-2 border-[#1E3A8A] rounded-xl p-4 text-center w-full md:w-48 shadow-md">
+                        <div class="text-3xl mb-2">📡</div>
+                        <h5 class="font-bold text-[#1E3A8A]">1. Mediación</h5>
+                        <p class="text-sm text-gray-600">Recolección de CDRs</p>
+                    </div>
+                    <div class="flow-arrow hidden md:block"></div>
+                    <div class="bg-gray-100 border-2 border-[#14B8A6] rounded-xl p-4 text-center w-full md:w-48 shadow-md">
+                        <div class="text-3xl mb-2">⚙️</div>
+                        <h5 class="font-bold text-[#14B8A6]">2. Tasación</h5>
+                        <p class="text-sm text-gray-600">Rating en tiempo real</p>
+                    </div>
+                    <div class="flow-arrow hidden md:block"></div>
+                    <div class="bg-gray-100 border-2 border-[#F97316] rounded-xl p-4 text-center w-full md:w-48 shadow-md">
+                        <div class="text-3xl mb-2">🧮</div>
+                        <h5 class="font-bold text-[#F97316]">3. Facturación</h5>
+                        <p class="text-sm text-gray-600">Cargos consolidados</p>
+                    </div>
+                    <div class="flow-arrow hidden md:block"></div>
+                    <div class="bg-gray-100 border-2 border-[#FBBF24] rounded-xl p-4 text-center w-full md:w-48 shadow-md">
+                        <div class="text-3xl mb-2">🧾</div>
+                        <h5 class="font-bold text-yellow-600">4. Emisión</h5>
+                        <p class="text-sm text-gray-600">Branding propio</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dasa" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col">
+                <div class="bg-[#14B8A6] text-white p-8">
+                    <div class="flex items-center space-x-4 mb-2">
+                        <span class="text-3xl">🇨🇴</span>
+                        <h3 class="text-3xl font-bold">2. DASA TELECOM</h3>
+                    </div>
+                    <p class="text-gray-100 text-xl font-semibold">Consolidación Operativa en Colombia</p>
+                </div>
+                <div class="p-8 flex-grow">
+                    <p class="text-lg text-gray-700 mb-6">El desafío principal de DASA era unificar las ventas con la provisión técnica. Se implementó una arquitectura de <strong>Gestión de Órdenes</strong> que orquesta el pedido desde la venta hasta la activación.</p>
+                    <div class="chart-container">
+                        <canvas id="timeChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4 text-center">El gráfico compara el tiempo récord de implementación en meses, destacando la velocidad de adaptación de BT2.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col">
+                <div class="p-8 flex-grow flex flex-col justify-center">
+                    <h4 class="text-2xl font-bold text-[#14B8A6] mb-4 text-center">Modelos de Cobro Flexibles</h4>
+                    <p class="text-gray-700 mb-6 text-center">La monetización avanzada procesa eventos de red bajo múltiples esquemas, adaptándose al comportamiento del usuario real.</p>
+                    <div class="chart-container">
+                        <canvas id="chargingChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4 text-center">Desglose de los tres pilares del procesamiento de eventos de red utilizados por DASA: Volumen, Tiempo y Servicios de Valor Agregado.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="bolitel" class="bg-white rounded-3xl shadow-xl overflow-hidden">
+            <div class="bg-[#F97316] text-white p-8">
+                <div class="flex items-center space-x-4 mb-2">
+                    <span class="text-3xl">🇧🇴</span>
+                    <h3 class="text-3xl font-bold">3. BOLITEL SRL (LIBRE)</h3>
+                </div>
+                <p class="text-gray-100 text-xl font-semibold">Integración Full-Stack BSS/OSS y Convergencia</p>
+            </div>
+            
+            <div class="p-8 md:p-12">
+                <p class="text-lg text-gray-700 mb-8">Bolitel representa el despliegue más robusto. Implementado sobre <strong>Red Hat 6.3</strong> y <strong>PostgreSQL</strong>, incluye integración directa con el ERP ITUHAND WEB y el Softswitch Iskratel.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h4 class="text-2xl font-bold text-[#F97316] mb-4">Complejidad del Ecosistema</h4>
+                        <p class="text-gray-600 mb-6">La arquitectura destaca por su integración a múltiples niveles: infraestructura base, sistemas contables (ERP) y cores de telefonía, garantizando automatización total.</p>
+                        <div class="chart-container">
+                            <canvas id="bolitelRadar"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4 text-center">Nivel de madurez e integración técnica en las distintas capas del ecosistema de Bolitel.</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 shadow-sm">
+                        <h4 class="text-2xl font-bold text-[#1E3A8A] mb-6 text-center">Red de Interconexión</h4>
+                        <p class="text-gray-600 mb-6 text-center">Mediación de tráfico integrada con los principales operadores mediante infraestructura local y servicios ITC Cloud para tráfico internacional.</p>
+                        
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                            <div class="bg-white p-3 rounded-lg shadow text-center font-bold text-[#1E3A8A]">Tigo</div>
+                            <div class="bg-white p-3 rounded-lg shadow text-center font-bold text-[#1E3A8A]">COMTECO</div>
+                            <div class="bg-white p-3 rounded-lg shadow text-center font-bold text-[#1E3A8A]">COTEL</div>
+                            <div class="bg-white p-3 rounded-lg shadow text-center font-bold text-[#1E3A8A]">Entel</div>
+                            <div class="bg-white p-3 rounded-lg shadow text-center font-bold text-[#1E3A8A]">Cotas</div>
+                            <div class="bg-white p-3 rounded-lg shadow text-center font-bold text-[#1E3A8A]">Viva</div>
+                            <div class="bg-white p-3 rounded-lg shadow text-center font-bold text-[#1E3A8A]">Cosett</div>
+                            <div class="bg-[#FBBF24] text-[#1E3A8A] col-span-2 p-3 rounded-lg shadow text-center font-extrabold">Gateway IBASIS (Intl.)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h3 class="text-3xl font-bold text-[#1E3A8A] mb-10 text-center">El ADN del Éxito: Pilares de la Arquitectura</h3>
+            <p class="text-center text-gray-600 mb-10 max-w-3xl mx-auto">La plataforma BT2 soporta estas implementaciones gracias a cuatro capacidades transversales que garantizan escalabilidad y automatización.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-[#1E3A8A]">
+                    <div class="text-4xl mb-4 text-[#1E3A8A]">🔌</div>
+                    <h4 class="text-xl font-bold text-[#1E3A8A] mb-2">Arquitectura SOA / APIs</h4>
+                    <p class="text-gray-600">Desacoplamiento total; la red y el software evolucionan de forma independiente gracias al ESB y API Gateway.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-[#F97316]">
+                    <div class="text-4xl mb-4 text-[#F97316]">📄</div>
+                    <h4 class="text-xl font-bold text-[#F97316] mb-2">Facturación Convergente</h4>
+                    <p class="text-gray-600">Capacidad de facturar servicios Móviles, Fijos, IP y Satelitales (LEO/GEO) consolidados en un solo documento.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-[#14B8A6]">
+                    <div class="text-4xl mb-4 text-[#14B8A6]">🧠</div>
+                    <h4 class="text-xl font-bold text-[#14B8A6] mb-2">Mediación Inteligente</h4>
+                    <p class="text-gray-600">Recolección y normalización de eventos crudos para evitar saturación de red y pérdida de ingresos.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-[#FBBF24]">
+                    <div class="text-4xl mb-4 text-yellow-600">🗃️</div>
+                    <h4 class="text-xl font-bold text-yellow-600 mb-2">Modelado de Datos (SID)</h4>
+                    <p class="text-gray-600">Basado en estándares de TM Forum, estructurado sobre bases de datos como PostgreSQL para máxima consistencia.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#1E3A8A] text-white py-16 text-center mt-12">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col items-center">
+            <div class="bt2-logo-panel bt2-logo-end w-full mb-8">
+                <div class="bt2-logo-wrap">
+                    <div class="bt2-logo-mark" aria-hidden="true">
+                        <span class="bt2-logo-orbit one"></span>
+                        <span class="bt2-logo-orbit two"></span>
+                        <span class="bt2-logo-orbit three"></span>
+                        <span class="bt2-logo-link a"></span>
+                        <span class="bt2-logo-link b"></span>
+                        <span class="bt2-logo-link c"></span>
+                        <span class="bt2-logo-node center"></span>
+                        <span class="bt2-logo-node top"></span>
+                        <span class="bt2-logo-node left"></span>
+                        <span class="bt2-logo-node bottom"></span>
+                    </div>
+                    <div class="bt2-logo-text">
+                        <span class="wordmark">BT2</span>
+                        <span class="divider"></span>
+                        <span class="tagline">Business Telecom BRM Platform</span>
+                    </div>
+                </div>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Conclusión Tecnológica</h3>
+            <p class="text-gray-300 max-w-2xl">BT2 Digital Telco Platform es el habilitador para operaciones convergentes, reduciendo fricciones técnicas mediante integraciones Full-Stack, bases de datos estables y arquitecturas modernas orientadas a servicios.</p>
+            <div class="mt-8 pt-8 border-t border-gray-700 w-full text-sm text-gray-400">
+                &copy; 2026 BT2 Digital Telco Platform. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function wrapLabel(label) {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= 16) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            if (currentLine) lines.push(currentLine);
+            return lines;
+        }
+
+        const commonTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const ctxTime = document.getElementById('timeChart').getContext('2d');
+        new Chart(ctxTime, {
+            type: 'bar',
+            data: {
+                labels: [wrapLabel('AMERICATEL (España)'), wrapLabel('DASA TELECOM (Colombia)')],
+                datasets: [{
+                    label: 'Tiempo de Implementación (Meses)',
+                    data: [3, 5],
+                    backgroundColor: ['#1E3A8A', '#14B8A6'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Meses', font: { weight: 'bold' } }
+                    }
+                }
+            }
+        });
+
+        const ctxCharging = document.getElementById('chargingChart').getContext('2d');
+        new Chart(ctxCharging, {
+            type: 'doughnut',
+            data: {
+                labels: [wrapLabel('Volumen Consumo'), wrapLabel('Tiempo de Uso'), wrapLabel('Servicios VAS')],
+                datasets: [{
+                    data: [34, 33, 33],
+                    backgroundColor: ['#1E3A8A', '#F97316', '#14B8A6'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: commonTooltipConfig
+                },
+                cutout: '65%'
+            }
+        });
+
+        const ctxRadar = document.getElementById('bolitelRadar').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: [
+                    wrapLabel('OS (Red Hat)'),
+                    wrapLabel('DB (PostgreSQL)'),
+                    wrapLabel('ERP (ITUHAND)'),
+                    wrapLabel('Core (Iskratel)'),
+                    wrapLabel('Cloud Internacional')
+                ],
+                datasets: [{
+                    label: 'Madurez Técnica',
+                    data: [100, 100, 90, 95, 85],
+                    backgroundColor: 'rgba(249, 115, 22, 0.4)',
+                    borderColor: '#F97316',
+                    pointBackgroundColor: '#1E3A8A',
+                    pointBorderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                        grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                        pointLabels: { font: { size: 11 }, color: '#374151' },
+                        ticks: { display: false, min: 0, max: 100 }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
